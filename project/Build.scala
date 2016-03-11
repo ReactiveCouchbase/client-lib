@@ -34,6 +34,7 @@ object ApplicationBuild extends Build {
       libraryDependencies += "org.reactivecouchbase" % "common-lib" % "1.0-SNAPSHOT",
       libraryDependencies += "org.reactivecouchbase" % "concurrent-lib" % "1.0-SNAPSHOT",
       libraryDependencies += "com.google.guava" % "guava" % "19.0",
+      libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "3.1.2",
       libraryDependencies += "junit" % "junit" % "4.11" % "test",
       libraryDependencies += "com.novocode" % "junit-interface" % "0.9" % "test",
       organization := "org.reactivecouchbase",
