@@ -12,21 +12,6 @@ public interface Client {
     <T> Future<T> call(Function<ServiceDescriptor, T> f);
     <T> Future<T> callM(Function<ServiceDescriptor, Future<T>> f);
 
-    default Client compose(Client client) {
-        final Client that = this;
-        return new Client() {
-            @Override
-            public <T> Future<T> call(Function<ServiceDescriptor, T> f) {
-                return that.call(desc -> client.<T>call(f));
-            }
-
-            @Override
-            public <T> Future<T> callM(Function<ServiceDescriptor, Future<T>> f) {
-                return that.callM(desc -> client.callM(desc));
-            }
-        };
-    }
-
     static Client client(ClientRegistry registry, String name) {
         return client(registry, name, Option.<String>none(), ImmutableList.<String>of());
     }
