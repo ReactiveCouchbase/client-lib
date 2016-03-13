@@ -10,6 +10,11 @@ public interface ClientRegistry {
 
     List<ServiceDescriptor> allServices();
     Registration register(final ServiceDescriptor desc);
+    void unregister(final String uuid);
+
+    default void unregister(final ServiceDescriptor desc) {
+        unregister(desc.uid);
+    }
 
     default List<ServiceDescriptor> services(String name) {
         return services(name, Option.<String>none(), ImmutableList.<String>of());

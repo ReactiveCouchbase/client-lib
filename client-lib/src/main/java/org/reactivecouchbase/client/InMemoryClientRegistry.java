@@ -20,4 +20,9 @@ public class InMemoryClientRegistry implements ClientRegistry {
         return () -> serviceCache.remove(desc.uid);
     }
 
+    @Override
+    public void unregister(String uid) {
+        serviceCache.remove(uid);
+    }
+
 }
