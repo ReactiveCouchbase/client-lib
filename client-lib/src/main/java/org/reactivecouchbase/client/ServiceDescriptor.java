@@ -1,31 +1,34 @@
 package org.reactivecouchbase.client;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import org.reactivecouchbase.common.Invariant;
 import org.reactivecouchbase.functional.Option;
 
-public class ServiceDescriptor {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ServiceDescriptor implements Serializable {
 
     public final String uid;
     public final String name;
     public final String url;
-    public final ImmutableMap<String, String> metadata;
-    public final ImmutableList<String> roles;
+    public final Map<String, String> metadata;
+    public final List<String> roles;
     public final Option<String> version;
 
-    public ServiceDescriptor(String uid, String name, String url, ImmutableMap<String, String> metadata, ImmutableList<String> roles, Option<String> version) {
+    public ServiceDescriptor(String uid, String name, String url, Map<String, String> metadata, List<String> roles, Option<String> version) {
         Invariant.checkNotNull(uid);
         Invariant.checkNotNull(name);
         Invariant.checkNotNull(url);
         this.uid = uid;
         this.name = name;
         this.url = url;
-        this.metadata = Objects.firstNonNull(metadata, ImmutableMap.<String, String>of());
-        this.roles = Objects.firstNonNull(roles, ImmutableList.<String>of());
-        this.version = Objects.firstNonNull(version, Option.<String>none());
+        this.metadata = MoreObjects.firstNonNull(metadata, new HashMap<>());
+        this.roles = MoreObjects.firstNonNull(roles, new ArrayList<>());
+        this.version = MoreObjects.firstNonNull(version, Option.<String>none());
     }
 
     public ServiceDescriptor(String uid, String name, String url) {
@@ -35,44 +38,44 @@ public class ServiceDescriptor {
         this.uid = uid;
         this.name = name;
         this.url = url;
-        this.metadata = ImmutableMap.of();
-        this.roles = ImmutableList.of();
+        this.metadata = new HashMap<>();
+        this.roles = new ArrayList<>();
         this.version = Option.none();
     }
 
-    public ServiceDescriptor(String uid, String name, String url, ImmutableList<String> roles) {
+    public ServiceDescriptor(String uid, String name, String url, List<String> roles) {
         Invariant.checkNotNull(uid);
         Invariant.checkNotNull(name);
         Invariant.checkNotNull(url);
         this.uid = uid;
         this.name = name;
         this.url = url;
-        this.metadata = ImmutableMap.of();
-        this.roles = MoreObjects.firstNonNull(roles, ImmutableList.<String>of());
+        this.metadata = new HashMap<>();;
+        this.roles = MoreObjects.firstNonNull(roles, new ArrayList<>());
         this.version = Option.none();
     }
 
-    public ServiceDescriptor(String uid, String name, String url, ImmutableMap<String, String> metadata) {
+    public ServiceDescriptor(String uid, String name, String url, Map<String, String> metadata) {
         Invariant.checkNotNull(uid);
         Invariant.checkNotNull(name);
         Invariant.checkNotNull(url);
         this.uid = uid;
         this.name = name;
         this.url = url;
-        this.metadata = MoreObjects.firstNonNull(metadata, ImmutableMap.<String, String>of());
-        this.roles = ImmutableList.of();
+        this.metadata = MoreObjects.firstNonNull(metadata, new HashMap<>());
+        this.roles = new ArrayList<>();
         this.version = Option.none();
     }
 
-    public ServiceDescriptor(String uid, String name, String url, ImmutableList<String> roles, Option<String> version) {
+    public ServiceDescriptor(String uid, String name, String url, List<String> roles, Option<String> version) {
         Invariant.checkNotNull(uid);
         Invariant.checkNotNull(name);
         Invariant.checkNotNull(url);
         this.uid = uid;
         this.name = name;
         this.url = url;
-        this.metadata = ImmutableMap.of();
-        this.roles = MoreObjects.firstNonNull(roles, ImmutableList.<String>of());
+        this.metadata = new HashMap<>();
+        this.roles = MoreObjects.firstNonNull(roles, new ArrayList<>());
         this.version = MoreObjects.firstNonNull(version, Option.<String>none());
     }
 
@@ -83,8 +86,8 @@ public class ServiceDescriptor {
         this.uid = uid;
         this.name = name;
         this.url = url;
-        this.metadata = ImmutableMap.of();
-        this.roles = ImmutableList.<String>of();
+        this.metadata = new HashMap<>();
+        this.roles = new ArrayList<>();
         this.version = MoreObjects.firstNonNull(version, Option.<String>none());
     }
 
