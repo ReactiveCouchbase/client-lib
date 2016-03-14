@@ -3,6 +3,7 @@ package org.reactivecouchbase.client;
 import org.reactivecouchbase.common.Duration;
 import org.reactivecouchbase.concurrent.Await;
 import org.reactivecouchbase.concurrent.Future;
+import org.reactivecouchbase.concurrent.NamedExecutors;
 import org.reactivecouchbase.concurrent.Promise;
 import org.reactivecouchbase.functional.Option;
 import org.reactivecouchbase.functional.Try;
@@ -35,7 +36,7 @@ public class CommandContext {
     }
 
     public static CommandContext of(int n) {
-        return new CommandContext(Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors() + 1), n, CircuitBreaker.Strategy.UNIQUE_PER_COMMAND, Option.<CommandCache>none(), Option.<CommandCollapser>none());
+        return new CommandContext(NamedExecutors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1, "COMMAND-CONTEXT"), n, CircuitBreaker.Strategy.UNIQUE_PER_COMMAND, Option.<CommandCache>none(), Option.<CommandCollapser>none());
     }
 
     public CommandContext withAllowedThreads(int n) {
