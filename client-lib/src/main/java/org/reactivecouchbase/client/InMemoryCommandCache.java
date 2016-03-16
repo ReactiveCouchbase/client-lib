@@ -11,7 +11,7 @@ public class InMemoryCommandCache implements CommandCache {
     private final Cache<String, Object> cache;
 
     private InMemoryCommandCache(Duration retained) {
-        this.cache = CacheBuilder.newBuilder().expireAfterWrite(retained.toMillis(), TimeUnit.MILLISECONDS).build();
+        this.cache = CacheBuilder.newBuilder().expireAfterAccess(retained.toMillis(), TimeUnit.MILLISECONDS).build();
     }
 
     public static InMemoryCommandCache of(Duration d) {
